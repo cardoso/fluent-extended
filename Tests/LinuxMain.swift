@@ -1,6 +1,16 @@
+//
+//  LinuxMain.swift
+//  more-fluent
+//
+//  Created by Matheus Martins on 5/15/17.
+//
+//
+
 import XCTest
-@testable import more_fluentTests
+
+@testable import MoreFluentTests
 
 XCTMain([
-    testCase(more_fluentTests.allTests),
-])
+    testCase(QueryPlusFilterTest.allTests),
+    testCase(EntityPlusFilterTest.allTests)
+    ])

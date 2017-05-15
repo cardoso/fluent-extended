@@ -6,6 +6,11 @@ import Fluent
 
 class EntityPlusFilterTest: XCTestCase {
     
+    static var allTests = [
+        ("testEntityAll", testEntityAll),
+        ("testEntityFirst", testEntityFirst)
+    ]
+    
     var database: Database!
     override func setUp() {
         do {

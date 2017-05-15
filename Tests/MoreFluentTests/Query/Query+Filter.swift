@@ -6,6 +6,10 @@ import Fluent
 
 class QueryPlusFilterTest: XCTestCase {
     
+    static var allTests = [
+        ("testQueryFilter", testQueryFilter)
+    ]
+    
     var database: Database!
     override func setUp() {
         do {

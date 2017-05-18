@@ -5,6 +5,6 @@ import PackageDescription
 let package = Package(
     name: "more-fluent",
     dependencies: [
-        .Package(url: "https://github.com/vapor/fluent.git", Version(2,0,0, prereleaseIdentifiers: ["beta"]))
+        .Package(url: "https://github.com/vapor/fluent.git", majorVersion: 2)
     ]
 )

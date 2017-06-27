@@ -1,10 +1,12 @@
 import Fluent
 
+public typealias QueryFilter = (field: String, value: NodeRepresentable?)
+
 extension Query {
     
     /// Filter self for each filter where field equals value
     public func filter(
-        _ filters: [(field: String, value: NodeRepresentable?)]
+        _ filters: [QueryFilter]
         ) throws -> Query<E> {
         var query = self
         try filters.forEach {

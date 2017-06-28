@@ -30,8 +30,8 @@ class QueryPlusFilterTest: XCTestCase {
         test2.string1 = "test2"
         try test2.save()
         
-        let query = try TestEntity.makeQuery().filter([("string1", "test"),
-                                                       ("int0", 0)])
+        let query = try TestEntity.makeQuery().filter(("string1", .equals, "test"),
+                                                      ("int0", .equals, 0))
         
         XCTAssertEqual(try query.count(), 1)
     }

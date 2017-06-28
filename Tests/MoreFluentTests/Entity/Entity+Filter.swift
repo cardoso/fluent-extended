@@ -35,7 +35,7 @@ class EntityPlusFilterTest: XCTestCase {
         test2.string1 = "different"
         try test3.save()
         
-        let tests = try TestEntity.all(with: [("string1", "same")])
+        let tests = try TestEntity.all(with: ("string1", .equals, "same"))
         
         XCTAssertEqual(tests.count, 2)
     }
@@ -51,7 +51,7 @@ class EntityPlusFilterTest: XCTestCase {
         test2.string1 = "same"
         try test2.save()
         
-        let entity = try TestEntity.first(with: [("string1", "same")])
+        let entity = try TestEntity.first(with: ("string1", .equals, "same"))
         
         XCTAssertEqual(entity?.int0, 0)
     }

@@ -4,5 +4,6 @@ import XCTest
 
 XCTMain([
     testCase(QueryPlusFilterTest.allTests),
-    testCase(EntityPlusFilterTest.allTests)
+    testCase(EntityPlusFilterTest.allTests),
+    testCase(FilterPlusNodeTest.allTests)
     ])

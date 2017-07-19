@@ -35,7 +35,7 @@ extension Filter.Comparison {
         }
     }
     
-    private static func customFromString(_ string: String) throws -> Filter.Comparison {
+    static func customFromString(_ string: String) throws -> Filter.Comparison {
         guard string.hasPrefix("custom(") && string.hasSuffix(")") else {
             throw FilterSerializationError.undefinedComparison(string)
         }
@@ -152,7 +152,7 @@ extension Filter.Method: NodeRepresentable {
         
         if case .group(let relation, let filters) = self {
             try node.set("relation", relation.string)
-            try node.set("filters", filters)
+            try node.set("filters", filters.map { $0.wrapped })
         }
         
         return node

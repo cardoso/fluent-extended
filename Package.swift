@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "more-fluent",
+    name: "FluentExtended",
     dependencies: [
         .Package(url: "https://github.com/vapor/fluent.git", majorVersion: 2)
     ]

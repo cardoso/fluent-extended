@@ -1,4 +1,4 @@
-@testable import MoreFluent
+@testable import FluentExtended
 
 import XCTest
 import Fluent

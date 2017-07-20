@@ -1,6 +1,6 @@
 # FluentExtended
 [![Build Status](https://travis-ci.org/cardoso/fluent-extended.svg?branch=master)](https://travis-ci.org/cardoso/fluent-extended)
-[![Coverage Status](https://coveralls.io/repos/github/cardoso/fluent-extended/badge.svg?branch=master)](https://coveralls.io/github/cardoso/fluent-extended?branch=master)
+[![Coverage Status](https://codecov.io/gh/cardoso/fluent-extended/branch/master/graph/badge.svg)](https://codecov.io/gh/cardoso/fluent-extended/branch/master/)
 
 Handy extensions for [Fluent](https://github.com/vapor/fluent)
 

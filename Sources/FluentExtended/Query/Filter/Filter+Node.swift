@@ -2,8 +2,8 @@ import Fluent
 import Node
 
 extension Filter: NodeRepresentable {
-    public init(entity: Entity.Type, node: Node) throws {
-        self.method = try Method(entity: entity, node: node)
+    public init(_ entity: Entity.Type, _ node: Node) throws {
+        self.method = try Method(entity, node)
         self.entity = entity
     }
     
@@ -103,7 +103,7 @@ extension Filter.Method: NodeRepresentable {
         }
     }
     
-    public init(entity: Entity.Type, node: Node) throws {
+    public init(_ entity: Entity.Type, _ node: Node) throws {
         let type: String = try node.get("type")
         
         if(type == "compare") {
@@ -125,7 +125,7 @@ extension Filter.Method: NodeRepresentable {
         if(type == "group") {
             let relation = try Filter.Relation(try node.get("relation"))
             let filters = try (try node.get("filters") as [Node]).map {
-                RawOr<Filter>.some(try Filter(entity: entity, node: $0))
+                RawOr<Filter>.some(try Filter(entity, $0))
             }
             
             self = .group(relation, filters); return

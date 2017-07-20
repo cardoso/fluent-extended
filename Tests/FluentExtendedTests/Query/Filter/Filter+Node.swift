@@ -11,11 +11,7 @@ class FilterPlusNodeTest: XCTestCase {
         ("testCustomFromString", testCustomFromString)
     ]
     
-    static func makeCompare() -> Filter {
-        return Filter(TestEntity.self, .compare("string0", .equals, "string0"))
-    }
-    
-    static func makeCompareNode() throws -> Node {
+    static func makeCompare() throws -> Node {
         var compare = Node([:])
         try compare.set("type", "compare")
         try compare.set("field", "string0")
@@ -24,11 +20,7 @@ class FilterPlusNodeTest: XCTestCase {
         return compare
     }
     
-    static func makeSubset() -> Filter {
-        return Filter(TestEntity.self, .subset("string0", .in, ["string0", "string1"]))
-    }
-    
-    static func makeSubsetNode() throws -> Node {
+    static func makeSubset() throws -> Node {
         var subset = Node([:])
         try subset.set("type", "subset")
         try subset.set("field", "string0")
@@ -37,11 +29,7 @@ class FilterPlusNodeTest: XCTestCase {
         return subset
     }
     
-    static func makeGroup() -> Filter {
-        return Filter(TestEntity.self, .group(.and, [RawOr.some(makeCompare()), RawOr.some(makeSubset())]))
-    }
-    
-    static func makeGroupNode() throws -> Node {
+    static func makeGroup() throws -> Node {
         var group = Node([:])
         try group.set("type", "group")
         try group.set("relation", "and")
@@ -51,11 +39,11 @@ class FilterPlusNodeTest: XCTestCase {
     
     func testInitAndMakeNode() throws {
         
-        let _compare = try FilterPlusNodeTest.makeCompareNode()
-        let compare = FilterPlusNodeTest.makeCompare()
+        let _compare = try FilterPlusNodeTest.makeCompare()
+        let compare = try Filter(TestEntity.self, _compare)
         
         XCTAssert(try compare.makeNode(in: nil) == _compare)
-        
+
         switch(compare.method) {
         case .compare(let field, let comparison, let value):
             XCTAssert(field == "string0")
@@ -65,8 +53,8 @@ class FilterPlusNodeTest: XCTestCase {
             XCTFail()
         }
         
-        let _subset = try FilterPlusNodeTest.makeSubsetNode()
-        let subset = FilterPlusNodeTest.makeSubset()
+        let _subset = try FilterPlusNodeTest.makeSubset()
+        let subset = try Filter(TestEntity.self, _subset)
         
         XCTAssert(try subset.makeNode(in: nil) == _subset)
         
@@ -79,8 +67,8 @@ class FilterPlusNodeTest: XCTestCase {
             XCTFail()
         }
         
-        let _group = try FilterPlusNodeTest.makeGroupNode()
-        let group = FilterPlusNodeTest.makeGroup()
+        let _group = try FilterPlusNodeTest.makeGroup()
+        let group = try Filter(TestEntity.self, _group)
         
         XCTAssert(try group.makeNode(in: nil) == _group)
         

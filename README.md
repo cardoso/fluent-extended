@@ -20,7 +20,7 @@ This allows for easily adding powerful filtering mechanism in resource routes:
 func index(_ req: Request) throws -> ResponseRepresentable {
     if let filterString = req.query?["filter"]?.string {
         let filterJSON = try JSON(bytes: filterString.data(using: .utf8)?.makeBytes() ?? [])
-        let filter = try Filter(entity: User.self, node: Node(filterJSON))
+        let filter = try Filter(User.self, Node(filterJSON))
         return try User.makeQuery().filter(filter).all().makeJSON()
     }
 

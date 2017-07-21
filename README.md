@@ -14,42 +14,33 @@ This allows for easily adding powerful filtering mechanism in resource routes:
 
 #### Usage:
 
+##### route
 ```swift
 /// [GET] @ /users
 /// Returns all users, optionally filtered by the request data.
 func index(_ req: Request) throws -> ResponseRepresentable {
     if let filterString = req.query?["filter"]?.string {
         let filterJSON = try JSON(bytes: filterString.data(using: .utf8)?.makeBytes() ?? [])
-        let filter = try Filter(User.self, Node(filterJSON))
+        let filter = try Filter(node: Node(filterJSON))
         return try User.makeQuery().filter(filter).all().makeJSON()
     }
-
+    
     return try User.all().makeJSON()
 }
 ```
 
-request:
+##### request
 ```json
-/users?filter={"type":"group","relation":"or","filters":[{"type":"subset","field":"username","scope":"in","values":["admin","edvaldo"]},{"type":"compare","field":"id","comparison":"greaterThan","value":3}]}
+[GET]  /users?filter={"entity":"StalkrCloud.User","method":{"type":"compare","comparison":"equals", "field":"username","value":"admin"}}
 ```
 
-response:
+##### response
 ```json
 [
   {
     "id": 1,
     "username": "admin",
     "password": "123456"
-  },
-  {
-    "id": 2,
-    "username": "edvaldo",
-    "password": "54984b30b129d24955660429ff62b336bbee8711107f741b686fda8f0f31b140"
-  },
-  {
-    "id": 4,
-    "username": "matheusmcardoso",
-    "password": "54984b30b129d24955660429ff62b336bbee8711107f741b686fda8f0f31b140"
   }
 ]
 ```
